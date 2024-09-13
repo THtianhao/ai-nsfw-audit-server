@@ -1,16 +1,20 @@
-# This is a sample Python script.
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
+import uvicorn
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+app = FastAPI()
 
+@app.post("/upload-image/")
+async def upload_image(file: UploadFile = File(...)):
+    # 获取图片的文件名和内容类型
+    file_info = {
+        "filename": file.filename,
+        "content_type": file.content_type,
+        "file_size": len(await file.read())  # 计算图片的字节大小
+    }
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    # 返回包含文件信息的 JSON 响应
+    return JSONResponse(content={"file_info": file_info})
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
