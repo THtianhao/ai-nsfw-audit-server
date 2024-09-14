@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 import uvicorn
 
 from python_ai_utils.image_utils.image_convert import file_to_ndarray, file_to_cv2_image
-from python_ai_utils.model_scripts.nsfw_script import predict_simge_image
+from python_ai_utils.model_scripts.nsfw_script import predict_simge_image, check_and_download_nsfw_model
 from python_ai_utils.model_scripts.sample_face_detection import is_single_face
 
 app = FastAPI()
@@ -19,4 +19,5 @@ async def upload_image(file: UploadFile = File(...)):
 
 
 if __name__ == "__main__":
+    check_and_download_nsfw_model()
     uvicorn.run(app, host="0.0.0.0", port=8000)

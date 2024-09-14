@@ -2,5 +2,6 @@ opencv-python
 fastapi
 uvicorn
 requests
+protobuf==3.20.3
 -r inspireface/requirements.txt
 -r nsfw_model/requirements.txt
