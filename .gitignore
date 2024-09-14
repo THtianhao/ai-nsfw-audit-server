@@ -1,3 +1,5 @@
 venv
 .idea
-__pycache__/
+__pycache__
+logs
+nsfw_mobilenet2.224x224.h5
