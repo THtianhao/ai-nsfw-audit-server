@@ -51,7 +51,6 @@ def case_face_detection_image(cv_image):
         center = ((x1 + x2) / 2, (y1 + y2) / 2)
         size = (x2 - x1, y2 - y1)
         # ====== modify box ======
-        #
         # # Apply rotation to the bounding box corners
         rect = ((center[0], center[1]), (size[0], size[1]), 0)
         box = cv2.boxPoints(rect)
@@ -62,7 +61,6 @@ def case_face_detection_image(cv_image):
         print(boxs)  # noinspection PyBroadException
 
         angle = face.roll
-
         # Apply rotation to the bounding box corners
         rect = ((center[0], center[1]), (size[0], size[1]), angle)
         box = cv2.boxPoints(rect)
