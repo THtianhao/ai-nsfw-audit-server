@@ -19,7 +19,6 @@ error_in_file(app, log_uv, "https://open.feishu.cn/open-apis/bot/v2/hook/f584024
 
 @app.post("/ai/audit")
 async def upload_image(file: UploadFile = File(...)):
-    raise 'test'
     image_bytes = file.file.read()
     cv_image = byte_to_cv2_image(image_bytes)
     cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
