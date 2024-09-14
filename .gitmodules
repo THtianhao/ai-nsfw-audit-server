@@ -1,3 +1,6 @@
 [submodule "python_ai_utils"]
 	path = python_ai_utils
 	url = https://github.com/THtianhao/python_ai_utils.git
+[submodule "nsfw_model"]
+	path = nsfw_model
+	url = https://github.com/GantMan/nsfw_model.git

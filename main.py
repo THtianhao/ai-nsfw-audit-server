@@ -2,19 +2,21 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 import uvicorn
 
+from inspireface.sample_face_detection import case_face_detection_image
+from python_ai_utils.image_utils.image_convert import file_to_ndarray, file_to_cv2_image
+from python_ai_utils.model_scripts.nsfw_script import predict_simge_image
+
 app = FastAPI()
 
-@app.post("/upload-image/")
-async def upload_image(file: UploadFile = File(...)):
-    # 获取图片的文件名和内容类型
-    file_info = {
-        "filename": file.filename,
-        "content_type": file.content_type,
-        "file_size": len(await file.read())  # 计算图片的字节大小
-    }
 
-    # 返回包含文件信息的 JSON 响应
-    return JSONResponse(content={"file_info": file_info})
+@app.post("/ai/audit")
+async def upload_image(file: UploadFile = File(...)):
+    image_array = file_to_ndarray(file)
+    cv_image = file_to_cv2_image(file)
+    result = predict_simge_image(image_array)
+    fd_result = case_face_detection_image(cv_image)
+    return JSONResponse(content={"file_info": result})
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
