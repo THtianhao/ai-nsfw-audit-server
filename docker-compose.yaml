@@ -3,15 +3,11 @@ version: "3:8"
 services:
   nsfw:
     image: python:3.8-slim
-#    image: robd003/python3.10:latest
     container_name: nsfw
-    working_dir: /app
     build: .
     ports:
-      - "8080:8080"
+      - "8000:8000"
     volumes:
         - ./:/app
-    environment:
-      - PYTHONUNBUFFERED=1
     command:
       /bin/bash -c "pip install -r /app/requirements.txt && python /app/main.py"
