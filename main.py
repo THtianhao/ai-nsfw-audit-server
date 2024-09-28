@@ -27,6 +27,10 @@ async def upload_image(file: UploadFile = File(...)):
     is_single = is_single_face(cv_image)
     return JSONResponse(content={"nsfw_info": nsfw_info, "is_single_face": is_single})
 
+@app.get("/ping")
+async def ping():
+    return "pong"
+
 
 if __name__ == "__main__":
     check_and_download_nsfw_model()
