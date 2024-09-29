@@ -2,12 +2,15 @@ version: "3.8"
 
 services:
   nsfw:
-    image: python:3.8-slim
+    build:
+      context: .  # 指定 Dockerfile 所在的上下文目录
+      dockerfile: Dockerfile  # 指定 Dockerfile 名称
     container_name: nsfw
-    build: .
+    volumes:
+      - .:/app
     ports:
       - "8000:8000"
-    volumes:
-        - ./:/app
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1  # 设置环境变量
     command:
       /bin/bash -c "pip install -r /app/requirements.txt && python /app/main.py"

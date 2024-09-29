@@ -33,7 +33,7 @@ async def ping():
 
 
 if __name__ == "__main__":
-    check_and_download_nsfw_model()
+    # check_and_download_nsfw_model()
     uvicorn.run(app,
 
                 host="0.0.0.0",
